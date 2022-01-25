@@ -5,8 +5,8 @@
 function! inqfix#enable() abort
   augroup inqfix
     au!
-    au CmdlineChanged * call <SID>on_change()
-    au CmdlineLeave * call <SID>on_leave()
+    au CmdlineChanged [/?] call <SID>on_change()
+    au CmdlineLeave [/?] call <SID>on_leave()
   augroup END
 endfunction
 
@@ -57,9 +57,6 @@ function! s:setqflist(fname, poslist) abort
 endfunction
 
 function! s:on_change() abort
-  if index(['/', '?'], getcmdtype()) == -1
-    return
-  endif
   if s:is_quickfix(win_getid())
     return
   endif
@@ -74,9 +71,6 @@ function! s:on_change() abort
 endfunction
 
 function! s:on_leave() abort
-  if index(['/', '?'], getcmdtype()) == -1
-    return
-  endif
   if s:is_quickfix(win_getid())
     return
   endif
